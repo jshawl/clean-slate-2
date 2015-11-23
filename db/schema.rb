@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20151118165849) do
   add_index "expenses", ["user_id"], name: "index_expenses_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.integer  "apartment_id"
+    t.integer  "apartment_id" # nice! A stretch feature for the future might be allowing users to have multiple apartments.
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

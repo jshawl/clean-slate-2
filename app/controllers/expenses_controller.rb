@@ -43,12 +43,14 @@ class ExpensesController < ApplicationController
   def destroy
     @apartment = current_user.apartment
     @expense.destroy
+    # ^^ can you think of a way to restrict deleting expenses to the person who created it?
     redirect_to apartment_path(@apartment)
   end
 
   private
   def expense_params
     params.require(:expense).permit(:created_at, :amount, :description, :user_first_name)
+    # instead of user_first_name, can you use current_user?
   end
 
   def set_post

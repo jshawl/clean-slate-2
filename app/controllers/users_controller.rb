@@ -34,6 +34,8 @@ class UsersController < ApplicationController
     user = User.find_by(email: params[:email])
     user.temp_id = current_user.apartment_id
     user.save
+    # excellent implementation! It would be nice if you sent an email when an invite is
+    # sent to a user - http://guides.rubyonrails.org/action_mailer_basics.html
     @apartment = current_user.apartment_id
     redirect_to apartment_path(@apartment), notice: "You have successfully invited this roommate. Your roommate must log-in to accept or decline your invitation."
   end
@@ -52,7 +54,9 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :encrypted_password, :temp_id)
+    params.require(:user).permit(:first_name, :last_name, :email, :encrypted_password, :temp_id) 
+    # I recommend removing temp_id from your strong params and instead getting this from the URL
+    # or a session variable.
   end
 
   def set_post
